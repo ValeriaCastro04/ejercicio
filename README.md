@@ -5,7 +5,8 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">EJERCICIO 3 - AVANZADO.</p>
+  <p align="center">EJERCICIO 2 - INTERMEDIO: Proteger todo el controlador de tareas.</p>
+  <p align="center">EJERCICIO 3 - AVANZADO: Validar que un usuario pueda borrar sus propios datos y no el de los demás (El único cambio fue en User controllers).</p>
   <p align="center">EL GRUPITO DE CUATRO</p>
 
 ## Description
