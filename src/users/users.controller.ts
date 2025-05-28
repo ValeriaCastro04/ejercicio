@@ -1,7 +1,10 @@
 import { Controller, Post, Get, Param, Body, Put, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
- 
+import { UseGuards, Req, ForbiddenException } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) { }
@@ -27,7 +30,18 @@ export class UsersController {
     }
  
     @Delete(':id')
-    delete(@Param('id') id: string): Promise<void> {
-        return this.usersService.deleteUser(+id);
+    async delete(@Param('id') id: string, @Req() req): Promise<any> {
+        const userId = parseInt(id, 10);
+
+        if (userId !== req.user.userId) {
+            throw new ForbiddenException('No puedes eliminar a otro usuario.');
+        }
+
+        await this.usersService.deleteUser(userId);
+        return {
+            message: 'Usuario eliminado correctamente',
+            id: userId,
+        };
     }
+
 }
