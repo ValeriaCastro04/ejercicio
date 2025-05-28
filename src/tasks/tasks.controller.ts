@@ -4,7 +4,8 @@ import { Task } from './task.entity';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
-@UseGuards(JwtAuthGuard)
+//Puse mensajes en cada uno de los endpoints para que se vea más claro el funcionamiento y comprobar que sí funcionan correctamente al probarlos en Postman
+@UseGuards(JwtAuthGuard) //Este decorador protege todos los endpoints de este controlador, asegurando que solo los usuarios autenticados puedan acceder a ellos. DESARROLLO EJERCICIO 2 - INTERMEDIO.
 @Controller('tasks')
 export class TasksController {
     constructor(private readonly tasksService: TasksService) {}

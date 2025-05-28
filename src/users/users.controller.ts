@@ -4,6 +4,8 @@ import { User } from './user.entity';
 import { UseGuards, Req, ForbiddenException } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+// Este decorador protege todos los endpoints de este controlador, asegurando que solo los usuarios autenticados puedan acceder a ellos.
+// El ejercicio 3 avanzado se desarrolla en este controlador, específicamente en el endpoint DELETE, que permite a un usuario eliminar su propia cuenta, pero no la de otros usuarios.
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UsersController {
@@ -29,7 +31,7 @@ export class UsersController {
         return this.usersService.updateUser(+id, body);
     }
  
-    @Delete(':id')
+    @Delete(':id') // Este endpoint permite a un usuario eliminar su propia cuenta. No permite eliminar cuentas de otros usuarios. EJERCICIO 3 - AVANZADO
     async delete(@Param('id') id: string, @Req() req): Promise<any> {
         const userId = parseInt(id, 10);
 
